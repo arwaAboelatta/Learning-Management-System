@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+<!-- Footer Section -->
+<footer style="background-color: #2a51a3; color: #ffffff; text-align: center; padding: 20px; position: relative; bottom: 0; width: 100%;">
+    <section id="rotating" class="py-8 overflow-hidden">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <div class="logo-scroll-container">
+                <div class="logo-scroll">
+                    <div class="logo-row">
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src="{% static 'images/gb-acdemy-footer-logo.svg' %}" alt="Logo 1"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src= "{% static 'images/gb-auto-footer-logo.svg' %}" alt="Logo 2"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src="{% static 'images/gb-capital-footer-logo.svg' %}" alt="Logo 3"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src= "{% static 'images/gb-logistics-footer-logo.svg' %}" alt="Logo 4"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src="{% static 'images/gb-ventures-footer-logo.svg' %}" alt="Logo 5"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                    </div>
+                    <div class="logo-row">
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src="{% static 'images/gb-acdemy-footer-logo.svg' %}" alt="Logo 1"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src= "{% static 'images/gb-auto-footer-logo.svg' %}" alt="Logo 2"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src="{% static 'images/gb-capital-footer-logo.svg' %}" alt="Logo 3"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src= "{% static 'images/gb-logistics-footer-logo.svg' %}" alt="Logo 4"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                            <img src="{% static 'images/gb-ventures-footer-logo.svg' %}" alt="Logo 5"
+                                 class="h-6 md:h-8 mx-4 md:mx-6">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <p style="margin: 0;">&copy; Copyright 2024 GB Academy All rights reserved</p>
+</footer>
+
+<style>
+
+
+    /* Custom styles for the logo scroll */
+    .logo-scroll-container {
+        overflow: hidden;
+    }
+
+    .logo-scroll {
+        display: flex;
+        animation: scroll 40s linear infinite;
+    }
+
+    .logo-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        min-width: 100%;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .logo-row figure:hover img {
+        filter: grayscale(0);
+        transform: scale(1.1);
+        transition: transform 0.3s ease-in-out;
+    }
+</style>
+
+</body>
+</html>

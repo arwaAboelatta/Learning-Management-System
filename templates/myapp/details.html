@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+    <style>
+        /* Center the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+{% include 'myapp/header.html' %}
+
+<div class="header-spacing"></div>
+
+<div class="container mx-auto px-4 py-8">
+    <div class="flex flex-wrap items-center -mx-4">
+        <div class="w-full px-4">
+            <div class="text-center">
+                <h1 class="mb-4 text-5xl font-bold text-blue-800 sm:text-4xl md:text-[40px] md:leading-[1.2]">
+                    Course Details
+                </h1>
+                <p class="mb-5 text-xl text-base text-body-color">
+                    Explore our diverse range of courses designed to help you achieve your learning goals.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if user.is_authenticated %}
+    <section class="bg-white">
+        <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-4 lg:grid-cols-12 lg:pt-14">
+            <div class="mr-auto place-self-center lg:col-span-7">
+                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl">
+                    <h5 class="mb-2 text-5xl font-bold tracking-tight text-gray-900">{{ course.course_name }}
+                        Topics</h5>
+                </h1>
+                <div class="flex flex-col justify-between p-4 leading-normal">
+                    <ul class="list-none pl-0 space-y-1 mb-4">
+                        {% for topic in topics_covered %}
+                            <li class="flex items-center font-normal text-2xl text-gray-700">
+                                <svg class="w-6 h-6 text-green-500 mr-2" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
+                                </svg>
+                                {{ topic }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="flex items-center mb-4">
+                        <svg class="w-6 h-6 text-gray-800 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                        </svg>
+                        <p class="text-lg font-lg text-gray-700 font-bold">Credit Hours: {{ course.credit_hours }}</p>
+                    </div>
+                    <p class="text-lg font-medium text-gray-700 ml-4">
+                        <svg class="w-6 h-6 text-gray-800 mr-2 inline" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                  d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+
+                        <span class="font-bold">Instructors: </span>
+                        {% for instructor in course.instructors.all %}
+                            <a href="{% url 'instructor_detail' instructor.instructor_id %}"
+                               class="text-grey-500 hover:underline">
+                                {{ instructor.first_name }} {{ instructor.last_name }}
+                            </a>
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                <img class="object-cover w-full h-96 md:h-auto md:w-80 md:rounded-none md:rounded-s-lg"
+                     src="{{ course.photo.url }}" alt="{{ course.course_name }}">
+            </div>
+        </div>
+    </section>
+
+    <form id="enrollForm" method="post" action="{% url 'enroll_schedules' %}">
+        {% csrf_token %}
+        <div class="flex justify-center">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg  px-16">
+                <table class=" text-lg text-left text-gray-500"
+                       style="width: 1330px;">
+                    <thead class="text-xs text-gray-700 uppercase bg-blue-300">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 ">Course Name</th>
+                        <th scope="col" class="px-6 py-3">Starts On</th>
+                        <th scope="col" class="px-6 py-3">Ends On</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for schedule in schedules %}
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ schedule.course.course_name }}</td>
+                            <td class="px-6 py-4">{{ schedule.created_on }}</td>
+                            <td class="px-6 py-4">{{ schedule.updated_date }}</td>
+                            <td class="w-4 p-4">
+                                <div>
+                                    <input type="radio" id="schedule{{ schedule.id }}" name="schedule"
+                                           value="{{ schedule.id }}" required/>
+                                    <label for="schedule{{ schedule.id }}">{{ schedule.name }}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="flex justify-center mt-4 py-4">
+                    <button id="enrollScheduleBtn" type="submit"
+                            class="px-4 py-2 bg-red-700 text-white font-semibold rounded hover:bg-red-800">
+                        Enroll Schedule
+                    </button>
+                </div>
+                {% if reviews %}
+                    <section class="py-12 mb-8 bg-white">
+                        <div class="max-w-screen-xl mx-auto px-4">
+                            <h2 class="text-3xl font-bold mb-6">Course Reviews</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {% for review in reviews %}
+                                    <div class="review-box border border-gray-200 rounded-lg p-6 bg-white shadow-sm">
+                                        <div class="flex items-center mb-4">
+                                            <p class="ml-2 text-lg font-semibold mr-2">{{ review.student.username }}</p>
+                                            <div class="flex space-x-1">
+                                                {% for i in "12345" %}
+                                                    {% if i|add:"0" <= review.rating %}
+                                                        <svg class="w-6 h-6 text-yellow-500" fill="currentColor"
+                                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M12 17.27L18.18 21 16.54 14.87 22 10.27H15.81L12 4 8.19 10.27H2L7.46 14.87 5.82 21 12 17.27Z"/>
+                                                        </svg>
+                                                    {% else %}
+                                                        <svg class="w-6 h-6 text-gray-300" fill="currentColor"
+                                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M12 17.27L18.18 21 16.54 14.87 22 10.27H15.81L12 4 8.19 10.27H2L7.46 14.87 5.82 21 12 17.27Z"/>
+                                                        </svg>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-700 mb-2">{{ review.comment }}</p>
+                                        <p class="text-gray-500 text-sm">{{ review.date_created }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal Structure -->
+    <div id="enrollModal" class="modal">
+        <div class="modal-content">
+            <span id="modalMessage"></span>
+            <div class="mt-4">
+                <button id="modalCloseBtn" class="bg-blue-500 text-white px-4 py-2 rounded">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('enrollForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const modal = document.getElementById('enrollModal');
+                    const modalMessage = document.getElementById('modalMessage');
+
+                    modal.style.display = "block";
+                    modalMessage.textContent = data.message;
+
+                    if (data.status === 'success') {
+                        modalMessage.classList.add('text-green-600');
+                    } else if (data.status === 'warning') {
+                        modalMessage.classList.add('text-yellow-600');
+                    } else {
+                        modalMessage.classList.add('text-red-600');
+                    }
+
+                    document.getElementById('modalCloseBtn').onclick = function () {
+                        modal.style.display = "none";
+                        if (data.status === 'success') {
+                            window.location.href = "{% url 'enrollments' %}";
+                        } else if (data.status === 'warning') {
+                            window.location.href = "{% url 'course_view' %}";
+                        }
+                    };
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('enrollModal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+{% else %}
+    <p class="text-center text-red-600">Please log in to enroll in a course.</p>
+{% endif %}
+
+{% include 'myapp/footer.html' %}
+</body>
+</html>

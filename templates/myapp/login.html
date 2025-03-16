@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(to bottom, #1155a9, #069fdb);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+
+
+<div class="w-full  max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 ">
+    <form class="space-y-7" method="post" action="{% url 'login' %}" enctype="multipart/form-data"
+          class="max-w-md mx-auto" class="flex flex-col items-center">  {% csrf_token %}
+
+        <a href=# class="flex items-center space-x-3 rtl:space-x-reverse justify-center ">
+            <img src="static/images/gb-academy-logo.svg" class="h-20" alt="Logo"/>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap "></span>
+        </a>
+
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="email" name="email" id="email"
+                   class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required/>
+            <label for="email"
+                   class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="password" name="password" id="password"
+                   class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required/>
+            <label for="password"
+                   class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+        </div>
+        {% csrf_token %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class=" text-red-700 "{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <button type="submit"
+                class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">
+            Login
+        </button>
+        <div class="text-lg font-medium text-gray-500 ">
+            Not registered? <a href="{% url 'signupStudent' %}"
+                               class="text-red-700 hover:underline">Create account</a>
+        </div>
+    </form>
+</div>
+<script>
+    var password = document.getElementById("password");
+
+    function validatePassword() {
+        if (password.value.trim() === '') {
+            password.setCustomValidity('Password cannot be empty.');
+        } else if (password.value.length < 3) {
+            password.setCustomValidity('Password must be at least 8 characters long.');
+        } else {
+            password.setCustomValidity('');  // Clear any previous custom messages
+        }
+    }
+    password.onchange = validatePassword;
+</script>
+</body>
+</html>

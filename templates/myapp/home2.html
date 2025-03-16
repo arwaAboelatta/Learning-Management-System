@@ -1,0 +1,395 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+    <style>
+        /* Container for the map card */
+        .map-card {
+            width: 100%;
+            max-width: 800px; /* Set the maximum width of the card */
+            border-radius: 15px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow to maintain rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for a card-like appearance */
+            display: flex;
+            position: relative;
+            margin-left: auto; /* Align to the right */
+            margin-right: 0;
+        }
+
+        /* Left side of the card */
+        .map-card .left-side {
+            width: 50%; /* Half width of the card */
+            padding: 10px; /* Padding around the image */
+        }
+
+        /* Right side of the card containing the map */
+        .map-card .right-side {
+            width: 50%; /* Half width of the card */
+            padding: 10px; /* Padding around the map */
+        }
+
+        /* Styling for the image on the left side */
+        .map-card .left-side img {
+            width: 100%; /* Ensure the image fills its container */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 15px; /* Match card's rounded corners */
+        }
+
+        /* Ensure the map iframe fills its container */
+        .map-card .right-side iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Service box styling */
+        .service-box {
+            padding: 20px;
+            border: 1px solid #e5e7eb; /* Light gray border */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a card-like appearance */
+            background-color: #ffffff; /* White background */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+        .service-icon {
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+{% include 'myapp/header.html' %}
+<section id="first_part" class="bg-white dark:bg-gray-900">
+    <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-12 lg:grid-cols-12 lg:pt-28 ">
+        <div class="mr-auto place-self-center lg:col-span-7">
+            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
+                Hands on experience <br>Customized For Excellence </h1>
+            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                Gain the essential knowledge and practical skills needed to thrive in today's competitive business
+                world with GB Academy’s Business & Computer Skills
+                <program class=""></program>
+                </a> </p>
+        </div>
+        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+            <div id="default-carousel" class="relative w-full " data-carousel="slide">
+                <!-- Carousel wrapper -->
+                <div class="relative h-96 overflow-hidden rounded-image">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{% static 'images/man.jpg' %}" class="absolute block w-full h-full object-cover"
+                             alt="...">
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{% static 'images/2.jpg' %}" class="absolute block w-full h-full object-cover"
+                             alt="...">
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{% static 'images/3.jpg' %}" class="absolute block w-full h-full object-cover"
+                             alt="...">
+                    </div>
+                    <!-- Add more items if needed -->
+                </div>
+
+                <!-- Slider indicators -->
+                <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                    <button type="button" class="w-3 h-3 rounded-full bg-white" aria-current="true" aria-label="Slide 1"
+                            data-carousel-slide-to="0"></button>
+                    <button type="button" class="w-3 h-3 rounded-full bg-white" aria-current="false"
+                            aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                    <button type="button" class="w-3 h-3 rounded-full bg-white" aria-current="false"
+                            aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                </div>
+
+                <!-- Slider controls -->
+                <button type="button"
+                        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 focus:ring-4 focus:ring-white group-focus:outline-none">
+                <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M5 1 1 5l4 4"/>
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+                </button>
+                <button type="button"
+                        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 focus:ring-4 focus:ring-white group-focus:outline-none">
+                <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="m1 9 4-4-4-4"/>
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="about-section" class="py-12 mb-8 bg-gray-100">
+    <div class="max-w-screen-xl mx-auto px-4">
+        <div class="h-12 flex justify-center items-center">
+            <img src="{% static 'images/gb-academy-logo.svg' %}" class="h-[100px] w-auto -my-[34px] mb-8"
+                 alt="Flowbite Logo"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="service-box">
+                <div class="service-icon">
+                    <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 10h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2zm0 0V7a2 2 0 0 1 2-2h4M5 7h2m-2 0a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H5M9 21H7a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2zm0 0h4a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2H9m-1 0V7M21 21h-1a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2zm0 0V7a2 2 0 0 0-2-2h-4M16 7h2a2 2 0 0 1 2 2v1"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold  mb-2">Vision</h3>
+                <p class="text-gray-600 text-xl">setting the pace in a world of lifelong learning</p>
+            </div>
+
+            <div class="service-box">
+                <div class="service-icon">
+                    <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 8v4l3 3M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold  mb-2">Mission</h3>
+                <p class="text-gray-600 text-xl">Our mission is to strengthen competitiveness of the Egyptian economy,
+                    as well as to raise awareness that learning is an investment for future success.</p>
+            </div>
+
+            <div class="service-box">
+                <div class="service-icon">
+                    <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M14.828 10.828a4 4 0 0 0 0 5.656M12 12l3.5 3.5M9.5 16.5 12 14M3 6l9-4 9 4-9 4-9-4zm0 4.5v12L12 22l9-4.5V10.5"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Facility</h3>
+                <p class="text-gray-600 text-xl">Our facilities include automotive technical and practical workshops,
+                    business skills classrooms, meeting rooms,and a conference center.</p>
+            </div>
+
+            <!-- Add more service boxes as needed -->
+        </div>
+    </div>
+</section>
+<div id="map"
+     style="display: flex; align-items: center; justify-content: center; height: 100%; padding: 20px; box-sizing: border-box;">
+    <div style="display: flex; width: 90%; max-width: 1200px; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+        <!-- Photo Section -->
+        <div style="flex: 1; position: relative; background: #f0f0f0;">
+            <img src="{% static 'images/blue.jpg' %}" alt="Photo"
+                 style="width: 100%; height: auto; object-fit: cover;"/>
+            <!-- Overlay Text -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); padding: 10px;">
+                <p style="margin: 0; text-align: center; font-size: 16px; display: flex; align-items: center;">
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         fill="#ffffff" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;">
+                        <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
+                        <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
+                    </svg>
+                    Email: <a href="mailto:info@gb-academy.net" style="color: #ffffff;">info@gb-academy.net</a>
+                </p>
+                <p style="margin: 0; text-align: center; font-size: 16px; display: flex; align-items: center;">
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         fill="#ffffff" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;">
+                        <path d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"/>
+                    </svg>
+                    Hotline: 16443
+                </p>
+            </div>
+        </div>
+        <!-- Map Section -->
+        <div style="flex: 2; position: relative; height: 470px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.7024935340155!2d31.04299821423402!3d30.07406118187152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585b6535712d5b%3A0x5eb78b9d1ea2be6d!2zR2hhYmJvdXIgQWNhZGVteSDYo9mD2KfYr9mK2YXZitipINi62KjZiNix!5e0!3m2!1sen!2seg!4v1663664931323!5m2!1sen!2seg"
+                    style="width: 100%; height: 100%; border: 0;"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</div>
+{#<div class="flex items-center justify-center">#}
+{#    {% if user.is_authenticated %}#}
+{#        <!-- Button to trigger the modal -->#}
+{#        <button data-modal-target="review-modal" data-modal-toggle="review-modal"#}
+{#                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"#}
+{#                type="button">#}
+{#            Open Review Form#}
+{#        </button>#}
+{#    {% else %}#}
+{#        <!-- Button to redirect to login page with next parameter -->#}
+{#        <a href="{% url 'login' %}?next={{ request.path }}#review-modal"#}
+{#           class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">#}
+{#            Open Review Form#}
+{#        </a>#}
+{#    {% endif %}#}
+{#</div>#}
+{##}
+{##}
+{#<!-- Main modal -->#}
+{#<div id="review-modal" tabindex="-1" aria-hidden="true"#}
+{#     class=" pt-24 hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">#}
+{#    <div class="relative p-4 w-full max-w-md max-h-full">#}
+{#        <!-- Modal content -->#}
+{#        <div class="relative bg-white rounded-lg shadow  ">#}
+{#            <!-- Modal body -->#}
+{#            <div class="p-4 ">#}
+{#                <form class="space-y-7" method="post" action="{% url 'home' %}"#}
+{#                      enctype="multipart/form-data">#}
+{#                    {% csrf_token %}#}
+{##}
+{#                    <div class="flex items-center justify-center space-x-5 rtl:space-x-reverse mb-4">#}
+{#                        <div class="text-left">#}
+{#                            <h2 class="text-3xl font-bold">Your Review Matters</h2>#}
+{#                            <p class="text-md text-gray-700">Share your thoughts on the course to help us improve!</p>#}
+{#                        </div>#}
+{#                        <img src="{% static 'images/man-holding-email-removebg-preview.png' %}"#}
+{#                             style="width: 400px; height:200px" class="w-auto alt=Logo"/>#}
+{#                    </div>#}
+{#                    <div class="relative z-0 w-full mb-5 group">#}
+{#                        <select name="course" id="course"#}
+{#                                class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"#}
+{#                                required>#}
+{#                            <option value="" disabled selected>Select a Course</option>#}
+{#                            {% for course in courses_to_review %}#}
+{#                                <option value="{{ course.course_id }}">{{ course.course_name }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                        <label for="course"#}
+{#                               class="peer-focus:font-medium absolute text-xl font-bold text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]#}
+{#                   peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>#}
+{#                    </div>#}
+{##}
+{#                    <div class="relative z-0 w-full mb-5 group">#}
+{#                        <input type="number" name="rating" id="rating" min="1" max="5"#}
+{#                               class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"#}
+{#                               placeholder=" " required/>#}
+{#                        <label for="rating"#}
+{#                               class="peer-focus:font-medium absolute text-lg text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Rating#}
+{#                            (1-5)</label>#}
+{#                    </div>#}
+{##}
+{#                    <div class="relative z-0 w-full mb-5 group">#}
+{#                        <textarea name="comments" id="comments"#}
+{#                                  class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"#}
+{#                                  placeholder=" " required></textarea>#}
+{#                        <label for="comments"#}
+{#                               class="peer-focus:font-medium absolute text-lg text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Comments</label>#}
+{#                    </div>#}
+{##}
+{#                    <div class="flex items-center justify-center">#}
+{#                        <button type="submit"#}
+{#                                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-bold rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center">#}
+{#                            Submit Review#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<div id="messagePopup" class="popup-overlay">#}
+{#    <div class="popup-content">#}
+{#        <span class="close-btn" onclick="closePopup()">&times;</span>#}
+{#        {% for message in messages %}#}
+{#            {% if 'course_review' in message.tags %}#}
+{#                <p>{{ message }}</p>#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#        <button onclick="closePopup()" class="popup-button">Close</button>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<style>#}
+{#    .popup-overlay {#}
+{#        position: fixed;#}
+{#        top: 0;#}
+{#        left: 0;#}
+{#        width: 100%;#}
+{#        height: 100%;#}
+{#        background-color: rgba(0, 0, 0, 0.5);#}
+{#        display: none; /* Start with the popup hidden */#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        z-index: 1000;#}
+{#    }#}
+{##}
+{#    .popup-content {#}
+{#        background-color: #fff;#}
+{#        padding: 20px;#}
+{#        border-radius: 8px;#}
+{#        text-align: center;#}
+{#        width: 300px;#}
+{#    }#}
+{##}
+{#    .popup-button, .close-btn {#}
+{#        background-color: #007bff;#}
+{#        color: white;#}
+{#        border: none;#}
+{#        padding: 10px 20px;#}
+{#        margin-top: 10px;#}
+{#        border-radius: 4px;#}
+{#        cursor: pointer;#}
+{#    }#}
+{##}
+{#    .close-btn {#}
+{#        float: right;#}
+{#        font-size: 20px;#}
+{#        font-weight: bold;#}
+{#        background: none;#}
+{#        padding: 0;#}
+{#        margin: 0;#}
+{#    }#}
+{#</style>#}
+{#<script>#}
+{#    document.addEventListener('DOMContentLoaded', function () {#}
+{#        // Check if there's a course review message#}
+{#        let hasCourseReviewMessage = false;#}
+{##}
+{#        {% for message in messages %}#}
+{#            {% if 'course_review' in message.tags %}#}
+{#                hasCourseReviewMessage = true;#}
+{#                break;#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{##}
+{#        // Only display the popup if there is a course review message#}
+{#        if (hasCourseReviewMessage) {#}
+{#            document.getElementById('messagePopup').style.display = 'flex';#}
+{#        }#}
+{#    });#}
+{##}
+{#    function closePopup() {#}
+{#        document.getElementById('messagePopup').style.display = 'none';#}
+{#    }#}
+{##}
+{#    document.addEventListener("DOMContentLoaded", function () {#}
+{#        if (window.location.hash === "#review-modal") {#}
+{#            var modal = document.querySelector("[data-modal-target='review-modal']");#}
+{#            if (modal) {#}
+{#                modal.click(); // This will trigger the modal to open#}
+{#            }#}
+{#        }#}
+{#    });#}
+{#</script>#}
+
+{% include 'myapp/footer.html' %}
+</body>
+</html>

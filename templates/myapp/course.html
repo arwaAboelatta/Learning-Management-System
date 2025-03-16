@@ -1,0 +1,106 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+    </head>
+    <body>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+    {% include 'myapp/header.html' %}
+    <div class="header-spacing"></div> <!-- Spacing for fixed navbar -->
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-wrap items-center -mx-4">
+            <div class="w-full px-4">
+                <div class="text-center">
+                    <h1 class="mb-4 text-6xl font-bold text-blue-800  sm:text-4xl md:text-[40px] md:leading-[1.2]">
+                        Courses
+                    </h1>
+                    <p class="mb-5 text-xl text-base text-body-color ">
+                        Explore our diverse range of courses designed to help you achieve your learning goals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="courses" class="grid grid-cols-2 md:grid-cols-3 gap-8 px-16 mx-auto py-8">
+        {% for course in courses %}
+            <div class="bg-white border border-gray-200 rounded-lg shadow">
+            {% if user.is_authenticated %}
+                {% if course.photo %}
+                    <a href="{% url 'details' course.course_id %}">
+                        <img class="rounded-t-lg" src="{{ course.photo.url }}" alt="{{ course.course_name }}"/>
+                    </a>
+                {% endif %}
+            {% else %}
+                {% if course.photo %}
+                    <a href="{% url 'login'  %}">
+                        <img class="rounded-t-lg" src="{{ course.photo.url }}" alt="{{ course.course_name }}"/>
+                    </a>
+                {% endif %}
+            {% endif %}
+
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">{{ course.course_name }}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 ">{{ course.description }}</p>
+                    <div class="flex items-center space-x-4">
+                        {% if user.is_authenticated %}
+                            {% if course.course_id in enrolled_courses %}
+                                <a href="{% url 'enrollments' %}">
+                                <button type="button"
+                                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-md px-4 py-2 text-center">
+                                    Enrolled
+                                </button>
+                                 </a>
+                            {% else %}
+                                <a href="{% url 'details' course.course_id %}">
+                                    <button type="button"
+                                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-md px-4 py-2 text-center">
+                                        Enroll
+                                    </button>
+                                </a>
+                            {% endif %}
+
+                            <!-- Wishlist toggle logic -->
+                            {% if course.course_id in wishlist_courses %}
+                                <a href="{% url 'toggle_wishlist' course.course_id %}">
+                                    <svg class="w-6 h-6 text-red-700 " aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z"/>
+                                    </svg>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'toggle_wishlist' course.course_id %}">
+                                    <svg class="w-6 h-6 text-red-500 hover:text-red-800" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                         viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                                    </svg>
+                                </a>
+                            {% endif %}
+
+                        {% else %}
+                            <a href="{% url 'login' %}">
+                                <button type="button"
+                                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-md px-4 py-2 text-center">
+                                    Enroll
+                                </button>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% include 'myapp/footer.html' %}
+    </body>
+    </html>
+

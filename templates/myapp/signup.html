@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(to bottom, #1155a9, #069fdb);
+        }
+
+        /* Pseudo-element for background image with opacity */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        {#background-image: url("{% static 'images/signup.png' %}");#} background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5; /* Adjust opacity here */
+            z-index: -1; /* Ensure the background stays behind content */
+        }
+
+        .container {
+            position: relative;
+            z-index: 1; /* Ensure content stays on top of the background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Center the content vertically */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+
+<div class="w-full  max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 ">
+    <form class="space-y-7" method="post" action="{% url 'signupStudent' %}" enctype="multipart/form-data"
+          class="max-w-md mx-auto" class="flex flex-col items-center">  {% csrf_token %}
+
+            <a href=# class="flex items-center space-x-3 rtl:space-x-reverse justify-center ">
+            <img src="static/images/gb-academy-logo.svg" class="h-20" alt="Logo"/>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap "></span>
+        </a>
+
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="text" name="username" id="username"
+                   class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required/>
+            <label for="username"
+                   class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Username</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="password" name="password" id="password"
+                   class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required/>
+            <label for="password"
+                   class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="password" name="repeat_password" id="repeat_password"
+                   class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required/>
+            <label for="repeat_password"
+                   class="peer-focus:font-medium absolute text-lg text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm
+                password</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="email" name="email" id="email"
+                   class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required/>
+            <label for="email"
+                   class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
+                address</label>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="relative z-0 w-full mb-5 group">
+                <input type="text" name="first_name" id="first_name"
+                       class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                       placeholder=" " required/>
+                <label for="first_name"
+                       class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First
+                    name</label>
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+                <input type="text" name="last_name" id="last_name"
+                       class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                       placeholder=" " required/>
+                <label for="last_name"
+                       class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last
+                    name</label>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="relative z-0 w-full mb-5 group">
+                <input type="tel" name="mobile_number" id="mobile_number"
+                       class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                       placeholder=" " required/>
+                <label for="mobile_number"
+                       class="peer-focus:font-medium absolute text-lg text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
+                    number</label>
+            </div>
+        </div>
+        {% csrf_token %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class=" text-red-700 "{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="flex items-center justify-center">
+            <button type="submit"
+                    class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-bold rounded-lg text-lg w-full  sm:w-auto px-5 py-2.5 text-center">
+                Submit
+            </button>
+
+        </div>
+    </form>
+</div>
+<div id="popup-modal" tabindex="-1"
+     class="font-[Almarai] fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        <div class="relative bg-white shadow">
+            <div class="p-6 flex flex-col items-center text-center">
+                <svg width="120" viewBox="0 0 125 127" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M121.414 25.4844C122.967 25.4844 124.227 26.7444 124.227 28.2969C124.227 29.8494 122.967 31.1094 121.414 31.1094C119.862 31.1094 118.602 29.8494 118.602 28.2969C118.602 26.7444 119.862 25.4844 121.414 25.4844ZM121.414 98.6094C122.967 98.6094 124.227 99.8694 124.227 101.422C124.227 102.974 122.967 104.234 121.414 104.234C119.862 104.234 118.602 102.974 118.602 101.422C118.602 99.8694 119.862 98.6094 121.414 98.6094Z"
+                          fill="#C6C6C6"/>
+                    <path d="M107.352 115.484C110.459 115.484 112.977 118.002 112.977 121.109C112.977 124.217 110.459 126.734 107.352 126.734C104.244 126.734 101.727 124.217 101.727 121.109C101.727 118.002 104.244 115.484 107.352 115.484Z"
+                          fill="#C10B20"/>
+                    <path d="M101.727 0.171875C103.279 0.171875 104.539 1.43187 104.539 2.98438C104.539 4.53687 103.279 5.79688 101.727 5.79688C100.174 5.79688 98.9141 4.53687 98.9141 2.98438C98.9141 1.43187 100.174 0.171875 101.727 0.171875Z"
+                          fill="#C6C6C6"/>
+                    <path d="M62.3516 8.60938C31.2847 8.60938 6.10156 33.7925 6.10156 64.8594C6.10156 95.9262 31.2847 121.109 62.3516 121.109C93.4184 121.109 118.602 95.9262 118.602 64.8594C118.602 33.7925 93.4184 8.60938 62.3516 8.60938Z"
+                          fill="black"/>
+                    <path d="M62.3516 107.047C39.0528 107.047 20.1641 88.1581 20.1641 64.8594C20.1641 41.5606 39.0528 22.6719 62.3516 22.6719C85.6503 22.6719 104.539 41.5606 104.539 64.8594C104.539 88.1581 85.6503 107.047 62.3516 107.047Z"
+                          fill="white"/>
+                    <path d="M83.2622 51.5622C85.4591 53.7587 85.4591 57.3194 83.2622 59.5159L63.375 79.4059L55.4213 87.3597L47.4647 79.4059L41.4994 73.4378C40.4028 72.3409 39.8516 70.9009 39.8516 69.4609C39.8516 68.0209 40.4028 66.5809 41.4994 65.4838C43.6963 63.2872 47.2569 63.2872 49.4532 65.4838L55.4213 71.4491L75.3088 51.5622C76.4084 50.4653 77.8456 49.9141 79.2856 49.9141C80.7256 49.9141 82.1628 50.4653 83.2622 51.5622Z"
+                          fill="#C10B20"/>
+                    <path d="M20.1641 121.109C21.7166 121.109 22.9766 122.369 22.9766 123.922C22.9766 125.474 21.7166 126.734 20.1641 126.734C18.6113 126.734 17.3516 125.474 17.3516 123.922C17.3516 122.369 18.6113 121.109 20.1641 121.109Z"
+                          fill="#C6C6C6"/>
+                    <path d="M13.1328 5.79688C17.0169 5.79688 20.1641 8.94406 20.1641 12.8281C20.1641 16.7122 17.0169 19.8594 13.1328 19.8594C9.24847 19.8594 6.10156 16.7122 6.10156 12.8281C6.10156 8.94406 9.24847 5.79688 13.1328 5.79688Z"
+                          fill="#C10B20"/>
+                    <path d="M3.28906 28.2969C4.84156 28.2969 6.10156 29.5569 6.10156 31.1094C6.10156 32.6619 4.84156 33.9219 3.28906 33.9219C1.73628 33.9219 0.476562 32.6619 0.476562 31.1094C0.476562 29.5569 1.73628 28.2969 3.28906 28.2969ZM3.28906 98.6094C4.84156 98.6094 6.10156 99.8694 6.10156 101.422C6.10156 102.974 4.84156 104.234 3.28906 104.234C1.73628 104.234 0.476562 102.974 0.476562 101.422C0.476562 99.8694 1.73628 98.6094 3.28906 98.6094Z"
+                          fill="#ECECEC"/>
+                </svg>
+                <h3 class="text-xl text-[#3C3C3B] font-extrabold mt-3">Thank you!</h3>
+                <p class="text-black/60 mt-4 text-lg font-bold">
+                    Welcome to GB Academy
+                </p>
+                <button class="bg-black text-black py-2 px-6 rounded-lg mt-6  text-xl font-extrabold hover:bg-red-800  transition ease-in duration-700  "
+                        onclick="modal.hide()">OK
+                </button>
+                <div class="flex items-center gap-8 mt-6">
+                    <a href="tel:16661" class="flex items-center gap-2">
+                        <svg width="25" viewBox="0 0 25 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.025 3.51344C16.338 -1.17214 8.74003 -1.17101 4.05446 3.51602C-0.631123 8.20305 -0.629998 15.801 4.05703 20.4866C8.74406 25.1722 16.342 25.171 21.0276 20.484C23.2779 18.233 24.5417 15.1803 24.541 11.9974C24.5404 8.8151 23.2756 5.76335 21.025 3.51344ZM18.7146 16.7159C18.7141 16.7164 18.7136 16.717 18.713 16.7175V16.7135L18.105 17.3175C17.3187 18.1137 16.1735 18.4413 15.085 18.1815C13.9883 17.8879 12.9458 17.4207 11.997 16.7975C11.1155 16.2341 10.2985 15.5755 9.561 14.8335C8.88239 14.1598 8.27274 13.4201 7.74099 12.6255C7.15936 11.7704 6.699 10.8389 6.37299 9.85746C5.99925 8.70452 6.30896 7.43941 7.173 6.58947L7.88499 5.87749C8.08294 5.67864 8.4046 5.67794 8.60339 5.87589C8.60391 5.87641 8.60447 5.87692 8.60499 5.87749L10.853 8.12547C11.0518 8.32342 11.0525 8.64508 10.8546 8.84388C10.854 8.84439 10.8535 8.84491 10.853 8.84547L9.53297 10.1655C9.15422 10.5401 9.1066 11.1354 9.42099 11.5655C9.89841 12.2207 10.4267 12.8373 11.001 13.4095C11.6413 14.0525 12.3373 14.6375 13.081 15.1575C13.5107 15.4572 14.0933 15.4067 14.465 15.0375L15.741 13.7415C15.9389 13.5427 16.2606 13.542 16.4594 13.7399C16.4599 13.7404 16.4604 13.741 16.461 13.7415L18.713 15.9975C18.9119 16.1954 18.9126 16.517 18.7146 16.7159Z"
+                                  fill="#C10B20"/>
+                        </svg>
+                        <span class="font-black text-red-700 text-2xl">16661</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var username_input = document.getElementById("username");
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("repeat_password");
+    var firstname_input = document.getElementById("first_name");
+    var lastname_input = document.getElementById("last_name");
+    var phone_input = document.getElementById("mobile_number");
+
+    // Regular expression for validating letters only
+    var lettersPattern = /^[A-Za-z]+$/;
+    var usernamePattern = /^[a-zA-Z0-9_]+$/;
+
+    function validateUsername() {
+        if (username_input.value.trim() === '') {
+            username_input.setCustomValidity('Username cannot be empty.');
+
+        } else if (username_input.value.length < 3 || username_input.value.length > 20) {
+            username_input.setCustomValidity('Username must be between 3 and 20 characters long.');
+
+        } else if (!username_input.value.match(usernamePattern)) {
+            username_input.setCustomValidity('Username can only contain letters, numbers, and underscores.');
+
+        } else {
+            username_input.setCustomValidity('');  // Clear any previous custom messages
+        }
+    }
+
+    function validatePassword() {
+        if (password.value.trim() === '') {
+            password.setCustomValidity('Password cannot be empty.');
+        } else if (password.value.length < 3) {
+            password.setCustomValidity('Password must be at least 8 characters long.');
+        } else {
+            password.setCustomValidity('');  // Clear any previous custom messages
+        }
+
+        if (confirm_password.value.trim() === '') {
+            confirm_password.setCustomValidity('Please confirm your password.');
+
+        } else if (password.value !== confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords don't match.");
+
+        } else {
+            confirm_password.setCustomValidity('');  // Clear any previous custom messages
+        }
+    }
+
+    function validateFirstName() {
+        if (firstname_input.value.trim() === '') {
+            firstname_input.setCustomValidity('First name cannot be empty.');
+
+        } else if (!firstname_input.value.match(lettersPattern)) {
+            firstname_input.setCustomValidity('First name must contain letters only.');
+
+        } else {
+            firstname_input.setCustomValidity('');  // Clear any previous custom messages
+        }
+    }
+
+    function validateLastName() {
+        if (lastname_input.value.trim() === '') {
+            lastname_input.setCustomValidity('Last name cannot be empty.');
+
+        } else if (!lastname_input.value.match(lettersPattern)) {
+            lastname_input.setCustomValidity('Last name must contain letters only.');
+
+        } else {
+            lastname_input.setCustomValidity('');  // Clear any previous custom messages
+        }
+    }
+
+    function validatePhone() {
+        if (phone_input.value.trim() === '') {
+            phone_input.setCustomValidity('Phone number cannot be empty.');
+
+        } else {
+            var phonePattern = /^\d{4}\d{3}\d{4}$/;  // Regular expression for format 123-456-7890
+
+            if (!phone_input.value.match(phonePattern)) {
+                phone_input.setCustomValidity('Enter phone number in this format: 1234-567-8901');
+
+            } else {
+                phone_input.setCustomValidity('');  // Clear any previous custom messages
+            }
+        }
+    }
+
+    username_input.onchange = validateUsername;
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+    firstname_input.onchange = validateFirstName;
+    lastname_input.onchange = validateLastName;
+    phone_input.onchange = validatePhone;
+
+    const popUpModel = document.getElementById('popup-modal');
+    const modalOptions = {
+        backdrop: 'static',
+    }
+    const modal = new Modal(popUpModel, modalOptions);
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                modal.show()
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    //     Show Modal if there are success msg from Django
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+{% include 'myapp/header.html' %}
+
+<div style="display: flex; flex-direction: column; " class="pb-8">
+    <!-- Instructor Image and Info -->
+    <div class="flex items-center -mb-2 pt-12 ">
+        <!-- Instructor Image -->
+        <div class="py-12" style="margin-right: 20px; margin-left: 300px;">
+            <img src="{{ instructor.profile_picture.url }}"
+                 class="border-radius-50 border-a p-a-1s object-cover"
+                 style="width: 250px; height: 250px; border-radius: 50%;"
+                 alt="{{ instructor.name }}">
+        </div>
+        <!-- Instructor Info -->
+        <div class="ml-8">
+            <h2 class="text-2xl text-black font-bold">{{ instructor.first_name }} {{ instructor.last_name }}</h2>
+            <p class="text-m">{{ instructor.title }}</p>
+            <ul>
+                <li>
+                    <a href="#">{{ instructor.university }}</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="#" class="font-bold ">{{ "Years of Experience: " }}</a>
+                    <a href="#">{{ instructor.experience_years }}</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Biography -->
+    <div class="px-8 mx-auto" style="max-width: 70%; width: 950px;">
+        <h3 class="text-xl font-bold mb-4">Biography</h3>
+        <p class="mb-4">{{ instructor.biography }}</p>
+    </div>
+
+    <!-- Qualifications Card -->
+    <a
+            class="block max-w-3xl p-6 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 mx-auto my-auto"
+            style="display: flex; align-items: center; justify-content: center; height:40vh;width: 130vh;">
+        <div>
+            <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900  text-left">
+                Instructor Qualifications
+            </h5>
+            <ul class="font-normal text-gray-700 dark:text-gray-400">
+                {% for qualification in instructor.qualifications.splitlines %}
+                    <li class="flex items-center mb-2">
+                        <svg class="w-6 h-6 text-blue-600 mb-1 mr-2" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m9 5 7 7-7 7"/>
+                        </svg>
+                        {{ qualification }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </a>
+</div>
+{% include 'myapp/footer.html' %}
+
+</body>
+</html>
